@@ -1,23 +1,27 @@
-var board, pump0, pump1, pump2, pump3, pump4;
+var board, pump0, pump1, pump2, pump3, pump4, pump5, pump6;
 
 var five = require('johnny-five');
 
 board = new five.Board();
 board.on('ready', function () {
-  // Counting down pins because that's the orientation 
+  // Counting down pins because that's the orientation
   // that my Arduino happens to be in
-  pump0 = new five.Led(7);
-  pump1 = new five.Led(6);
-  pump2 = new five.Led(5);
-  pump3 = new five.Led(4);
-  pump4 = new five.Led(3);
+  pump0 = new five.Led("7");
+  pump1 = new five.Led("6");
+  pump2 = new five.Led("5");
+  pump3 = new five.Led("4");
+  pump4 = new five.Led("3");
+  pump5 = new five.Led("2");
+  pump6 = new five.Led("A0");
 
   board.repl.inject({
     p0: pump0,
     p1: pump1,
     p2: pump2,
     p3: pump3,
-    p4: pump4
+    p4: pump4,
+    p5: pump5,
+    p6: pump6
   });
 
   console.log("\033[31m[MSG] Bar Mixvah Ready\033[91m");
@@ -70,6 +74,12 @@ exports.usePump = function (pump) {
       break;
     case 'pump4':
       using = pump4;
+      break;
+    case 'pump5':
+      using = pump5;
+      break;
+    case 'pump6':
+      using = pump6;
       break;
     default:
       using = null;
